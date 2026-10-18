@@ -762,6 +762,15 @@ sensor:
         } else if ("vTcTemp1" == target_batch) {
           id(vTcTemp1).publish_state(value_le);
 
+        } else if ("vPtTemp1" == target_batch) {
+          id(vPtTemp1).publish_state(value_le);
+
+        } else if ("vPtTemp2" == target_batch) {
+          id(vPtTemp2).publish_state(value_le);
+
+        } else if ("vPtTemp3" == target_batch) {
+          id(vPtTemp3).publish_state(value_le);  
+
         } else if ("${FiringModeAttr}" == target_batch) { // Usually FiringMode_0x1CBE
           id(cPowerIcon).publish_state(value_le - 1); // Values are 1, 2 and 3. Start with 0 so we can work with index
 
