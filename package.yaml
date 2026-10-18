@@ -13,7 +13,7 @@ substitutions:
 
 esphome:
   libraries:
-    - EsphomeThermatik=https://github.com/vk496/esphome-thermatik.git
+    - EsphomeThermatik=https://github.com/schmidtfbz/esphome-thermatik.git
   includes:
     - <ble_values.h>
 
