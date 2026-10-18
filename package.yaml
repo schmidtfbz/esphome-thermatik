@@ -4,7 +4,7 @@ substitutions:
   pincode: 000000
   fetch_interval: 7s
 
-  FiringModeAttr: "FiringMode_0x1CBE" # https://github.com/vk496/esphome-thermatik/issues/10
+  FiringModeAttr: "FiringMode_0x1CBE" # https://github.com/schmidtfbz/esphome-thermatik/issues/10
 
   # Internal
   MAIN_SERVICE: "0000fff0-0000-1000-8000-00805f9b34fb"
@@ -13,7 +13,7 @@ substitutions:
 
 esphome:
   libraries:
-    - EsphomeThermatik=https://github.com/vk496/esphome-thermatik.git
+    - EsphomeThermatik=https://github.com/schmidtfbz/esphome-thermatik.git
   includes:
     - <ble_values.h>
 
@@ -133,6 +133,9 @@ globals:
         "_bDoorOpen",
         "cRefillStatus",
         "cSensorError",
+        "vPtTempDec1",
+        "vPtTempDec2",
+        "vPtTempDec3",
       }
 
 # Main trigger
@@ -636,7 +639,43 @@ sensor:
     filters:
       - round: 0
       - skip_initial: 2
+      
+  - platform: template
+    id: vPtTempDec1
+    name: "Water temperature stove"
+    icon: "mdi:thermometer"
+    device_class: "temperature"
+    state_class: "measurement"
+    unit_of_measurement: "°C"
+    accuracy_decimals: 1
+    filters:
+      - round: 0
+      - skip_initial: 2
 
+    - platform: template
+    id: vPtTempDec2
+    name: "Temperature buffer top"
+    icon: "mdi:thermometer"
+    device_class: "temperature"
+    state_class: "measurement"
+    unit_of_measurement: "°C"
+    accuracy_decimals: 1
+    filters:
+      - round: 0
+      - skip_initial: 2
+      
+    - platform: template
+    id: vPtTempDec3
+    name: "Temperature buffer bottom"
+    icon: "mdi:thermometer"
+    device_class: "temperature"
+    state_class: "measurement"
+    unit_of_measurement: "°C"
+    accuracy_decimals: 1
+    filters:
+      - round: 0
+      - skip_initial: 2
+      
   - platform: template
     id: cAirSlider
     name: "Air slider"
