@@ -133,6 +133,9 @@ globals:
         "_bDoorOpen",
         "cRefillStatus",
         "cSensorError",
+        "vPtTempDec1",
+        "vPtTempDec2",
+        "vPtTempDec3",
       }
 
 # Main trigger
@@ -636,6 +639,42 @@ sensor:
     filters:
       - round: 0
       - skip_initial: 2
+      
+  - platform: template
+    id: vPtTempDec1
+    name: "Kamin Wärmetauscher"
+    icon: "mdi:thermometer"
+    device_class: "temperature"
+    state_class: "measurement"
+    unit_of_measurement: "°C"
+    accuracy_decimals: 0
+    filters:
+      - round: 0
+      - skip_initial: 2
+      
+    - platform: template
+    id: vPtTempDec2
+    name: "Speicher oben"
+    icon: "mdi:thermometer"
+    device_class: "temperature"
+    state_class: "measurement"
+    unit_of_measurement: "°C"
+    accuracy_decimals: 0
+    filters:
+      - round: 0
+      - skip_initial: 2
+
+  - platform: template
+    id: vPtTempDec3
+    name: "Speicher unten"
+    icon: "mdi:thermometer"
+    device_class: "temperature"
+    state_class: "measurement"
+    unit_of_measurement: "°C"
+    accuracy_decimals: 0
+    filters:
+      - round: 0
+      - skip_initial: 2    
 
   - platform: template
     id: cAirSlider
@@ -755,6 +794,15 @@ sensor:
         } else if ("BoardTemp" == target_batch) {
           id(BoardTemp).publish_state(value_le);
 
+         } else if ("vPtTempDec1" == target_batch) {
+          id(vPtTempDec1).publish_state(value_le);
+        
+        } else if ("vPtTempDec2" == target_batch) {
+          id(vPtTempDec2).publish_state(value_le);
+
+        } else if ("vPtTempDec3" == target_batch) {
+          id(vPtTempDec3).publish_state(value_le);
+ 
         } else if ("_bDoorOpen" == target_batch) {
           id(_bDoorOpen).publish_state(value_le == 1); // bool. 0 closed, 1 open
           if (value_le == 1 && id(sezam).position != COVER_OPEN) {
