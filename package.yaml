@@ -649,7 +649,8 @@ sensor:
     unit_of_measurement: "°C"
     accuracy_decimals: 1
     filters:
-      - round: 0
+      - multiply: 0.1
+      - round: 1
       - skip_initial: 2
 
   - platform: template
@@ -661,7 +662,8 @@ sensor:
     unit_of_measurement: "°C"
     accuracy_decimals: 1
     filters:
-      - round: 0
+      - multiply: 0.1
+      - round: 1
       - skip_initial: 2
 
   - platform: template
@@ -673,7 +675,8 @@ sensor:
     unit_of_measurement: "°C"
     accuracy_decimals: 1
     filters:
-      - round: 0
+      - multiply: 0.1
+      - round: 1
       - skip_initial: 2    
 
   - platform: template
