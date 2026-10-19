@@ -639,7 +639,7 @@ sensor:
     filters:
       - round: 0
       - skip_initial: 2
-      
+  
   - platform: template
     id: vPtTempDec1
     name: "Kamin Wärmetauscher"
@@ -651,8 +651,8 @@ sensor:
     filters:
       - round: 0
       - skip_initial: 2
-      
-    - platform: template
+
+  - platform: template
     id: vPtTempDec2
     name: "Speicher oben"
     icon: "mdi:thermometer"
