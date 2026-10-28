@@ -136,6 +136,9 @@ globals:
         "vPtTempDec1",
         "vPtTempDec2",
         "vPtTempDec3",
+        "cSusi",
+        "cSusiStatuses",
+        "cSusiValue",
       }
 
 # Main trigger
@@ -677,7 +680,35 @@ sensor:
     filters:
       - multiply: 0.1
       - round: 1
-      - skip_initial: 2    
+      - skip_initial: 2
+
+  - platform: template
+    id: cSusiValue
+    name: "S-USI Differenzdruck"
+    icon: "mdi:gauge"
+    state_class: "measurement"
+    unit_of_measurement: "Pa"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+      - round: 1
+      - skip_initial: 2
+
+  - platform: template
+    id: cSusi
+    name: "S-USI Status"
+    icon: "mdi:information-outline"
+    accuracy_decimals: 0
+    filters:
+      - skip_initial: 2
+
+  - platform: template
+    id: cSusiStatuses
+    name: "S-USI Statusdetails"
+    icon: "mdi:list-status"
+    accuracy_decimals: 0
+    filters:
+      - skip_initial: 2
 
   - platform: template
     id: cAirSlider
@@ -805,6 +836,15 @@ sensor:
 
         } else if ("vPtTempDec3" == target_batch) {
           id(vPtTempDec3).publish_state(value_le);
+
+        } else if ("cSusi" == target_batch) {
+            id(cSusi).publish_state(value_le);
+            
+        } else if ("cSusiStatuses" == target_batch) {
+            id(cSusiStatuses).publish_state(value_le);
+            
+        } else if ("cSusiValue" == target_batch) {
+            id(cSusiValue).publish_state(value_le);
  
         } else if ("_bDoorOpen" == target_batch) {
           id(_bDoorOpen).publish_state(value_le == 1); // bool. 0 closed, 1 open
