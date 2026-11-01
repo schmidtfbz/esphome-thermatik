@@ -979,7 +979,7 @@ sensor:
     entity_category: diagnostic
     disabled_by_default: true
     accuracy_decimals: 0
- - platform: template
+  - platform: template
     id: susi_status_flags
     icon: "mdi:information-outline"
     name: "S-USI Status-Bits"
