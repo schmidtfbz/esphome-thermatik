@@ -990,7 +990,8 @@ sensor:
     id: susi_pressure
     icon: "mdi:gauge"
     name: "S-USI Difference pressure"
-    entity_category: measurement
+    device_class: pressure
+    state_class: measurement
     disabled_by_default: false
     unit_of_measurement: "Pa"
     accuracy_decimals: 1
