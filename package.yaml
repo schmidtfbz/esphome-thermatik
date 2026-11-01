@@ -214,6 +214,9 @@ globals:
         "_RelayStatus",
         "cAirSliderInitialized",
         "Mode_0x1CD4",
+        "cSusi",
+        "cSusiStatuses",
+        "cSusiValue",
       }
 
 # Main trigger
@@ -970,6 +973,28 @@ sensor:
     unit_of_measurement: h
     accuracy_decimals: 0
   - platform: template
+    id: susi_status
+    icon: "mdi:shield-check"
+    name: "S-USI Status"
+    entity_category: diagnostic
+    disabled_by_default: true
+    accuracy_decimals: 0
+ - platform: template
+    id: susi_status_flags
+    icon: "mdi:information-outline"
+    name: "S-USI Status-Bits"
+    entity_category: diagnostic
+    disabled_by_default: true
+    accuracy_decimals: 0
+  - platform: template
+    id: susi_pressure
+    icon: "mdi:gauge"
+    name: "S-USI Difference pressure"
+    entity_category: measurement
+    disabled_by_default: false
+    unit_of_measurement: "Pa"
+    accuracy_decimals: 1
+  - platform: template
     id: relay_status
     icon: "mdi:electric-switch"
     name: "Relay Status Flags"
@@ -1163,6 +1188,13 @@ sensor:
           if (channel == 0) id(pt_temperature_1).publish_state(temperature);
           if (channel == 1) id(pt_temperature_2).publish_state(temperature);
           if (channel == 2) id(pt_temperature_3).publish_state(temperature);
+        } else if ("cSusi" == target_batch) {
+          id(susi_status).publish_state(value_le);
+        } else if ("cSusiStatuses" == target_batch) {
+          id(susi_status_flags).publish_state(value_le);
+        } else if ("cSusiValue" == target_batch) {
+          id(susi_pressure).publish_state(
+              thermatik::signed_word(value_le) / 10.0f);
         } else if ("hourCounter" == target_batch) {
           id(operating_hours).publish_state(value_le);
         } else if ("_RelayStatus" == target_batch) {
